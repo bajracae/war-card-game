@@ -38,8 +38,8 @@ class Game(object):
                 print(len(players[0].cards))
                 print(len(players[1].cards))
                 print("====")
-                print(p1_card_rank)
-                print(p2_card_rank)
+                print("P1 rank:", p1_card_rank)
+                print("P2 rank:", p2_card_rank)
                 print("====")
 
                 if p1_card_rank > p2_card_rank:
@@ -51,16 +51,21 @@ class Game(object):
                     players[1].prepend_cards(all_cards)
                     break
                 else:
-                    field[0].append(players[0].pop_card())
-                    field[0].append(players[0].pop_card())
-                    field[0].append(players[0].pop_card())
+                    print("War!")
+                    for c in range(0, 3):
+                        field[0].append(players[0].pop_card())
+                        field[1].append(players[1].pop_card())
 
-                    field[1].append(players[1].pop_card())
-                    field[1].append(players[1].pop_card())
-                    field[1].append(players[1].pop_card())
+            if len(players[0].cards) == 0:
+                print("Player 2 wins!")
+                break
 
-            print(len(players[0].cards))
-            print(len(players[1].cards))
-            exit()
+            if len(players[1].cards) == 0:
+                print("Player 1 wins!")
+                break
+
+            print("Number of cards P1:", len(players[0].cards))
+            print("Number of cards P2:", len(players[1].cards))
+            # exit()
 
 
