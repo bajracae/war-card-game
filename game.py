@@ -8,10 +8,10 @@ class Game(object):
     def run_game(self):
         deck = Deck()
 
+        player = raw_input("Enter your name: ")
+
         # Create players of the game
-        players = [Player("Player 1"), Player("Player 2")]
-        # for p in range(1, 3):
-        #     players.append(Player("P{}".format(p)))
+        players = [Player(player), Player("Computadora")]
 
         # Deal out the cards
         while len(deck.deck) > 0:
@@ -25,8 +25,8 @@ class Game(object):
 
             print("====")
             print("Starting")
-            print(len(players[0].cards))
-            print(len(players[1].cards))
+            print(players[0].num_cards())
+            print(players[1].num_cards())
             print("====")
 
             while True:
@@ -35,12 +35,12 @@ class Game(object):
 
                 p1_card_rank = field[0][-1].get_rank()
                 p2_card_rank = field[1][-1].get_rank()
-                print(len(players[0].cards))
-                print(len(players[1].cards))
-                print("====")
-                print("P1 rank:", p1_card_rank)
-                print("P2 rank:", p2_card_rank)
-                print("====")
+                # print(players[0].num_cards())
+                # print(players[1].num_cards())
+                # print("====")
+                # print("P1 rank:", p1_card_rank)
+                # print("P2 rank:", p2_card_rank)
+                # print("====")
 
                 if p1_card_rank > p2_card_rank:
                     all_cards = [j for i in field for j in i]
@@ -52,20 +52,39 @@ class Game(object):
                     break
                 else:
                     print("War!")
-                    for c in range(0, 3):
-                        field[0].append(players[0].pop_card())
-                        field[1].append(players[1].pop_card())
+                    
+                    if players[0].num_cards() < 4 and players[1].num_cards() >= 4:
+                        print("Player 2 wins!")
+                        exit()
 
-            if len(players[0].cards) == 0:
+                    elif players[1].num_cards() < 4 and players[0].num_cards() >= 4:
+                        print("Player 1 wins!")
+                        exit()
+
+                    elif players[0].num_cards() < 4 and players[1].num_cards() < 4:
+                        print("Not enough cards to wage a war. Game has ended in a tie.")
+                        exit()
+
+                    else:
+                        for c in range(0, 3):
+                            field[0].append(players[0].pop_card())
+                            field[1].append(players[1].pop_card())
+                print("===AFTER Drawing")
+                print(players[0].num_cards())
+                print(players[1].num_cards())
+                print("===")
+
+
+            if players[0].num_cards() == 0:
                 print("Player 2 wins!")
                 break
 
-            if len(players[1].cards) == 0:
+            if players[1].num_cards() == 0:
                 print("Player 1 wins!")
                 break
 
-            print("Number of cards P1:", len(players[0].cards))
-            print("Number of cards P2:", len(players[1].cards))
+            print("Number of " + players[0].name + "'s cards: ", players[0].num_cards())
+            print("Number of " + players[1].name + "'s cards: ", players[1].num_cards())
             # exit()
 
 
