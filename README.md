@@ -1,6 +1,9 @@
 # war-card-game
 This game is a programming assignment for a job application.
 
+## Python version
+I used Python 2.7.5 during the development of this project.
+
 DUE DATE OF THIS IS THE 12/22/21
 
 # Personal notes
