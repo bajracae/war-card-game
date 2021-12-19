@@ -27,3 +27,6 @@ class Player(Deck):
     def show_cards(self):
         for c in self.cards:
             c.show()
+
+    def num_cards(self):
+        return len(self.cards)  
