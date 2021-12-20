@@ -1,14 +1,20 @@
 from deck import Deck
 from player import Player
 
+from colorama import init
+from pyfiglet import Figlet
+from termcolor import colored
+
 class Game(object):
     def __init__(self):
         self.run_game()
 
     def run_game(self):
+        self.header()
+
         deck = Deck()
 
-        player = raw_input("Enter your name: ")
+        player = input("Enter your name: ")
 
         # Create players of the game
         players = [Player(player), Player("Computadora")]
@@ -24,9 +30,8 @@ class Game(object):
             field = [[], []]
 
             print("====")
-            print("Starting")
-            print(players[0].num_cards())
-            print(players[1].num_cards())
+            print("{}: {} cards".format(player, players[0].num_cards()))
+            print("{}: {} cards".format("Computadora", players[1].num_cards()))
             print("====")
 
             while True:
@@ -35,12 +40,6 @@ class Game(object):
 
                 p1_card_rank = field[0][-1].get_rank()
                 p2_card_rank = field[1][-1].get_rank()
-                # print(players[0].num_cards())
-                # print(players[1].num_cards())
-                # print("====")
-                # print("P1 rank:", p1_card_rank)
-                # print("P2 rank:", p2_card_rank)
-                # print("====")
 
                 if p1_card_rank > p2_card_rank:
                     all_cards = [j for i in field for j in i]
@@ -54,11 +53,11 @@ class Game(object):
                     print("War!")
                     
                     if players[0].num_cards() < 4 and players[1].num_cards() >= 4:
-                        print("Player 2 wins!")
+                        print("Player 1 doesn't have enough cards to wage war. Player 2 wins!")
                         exit()
 
                     elif players[1].num_cards() < 4 and players[0].num_cards() >= 4:
-                        print("Player 1 wins!")
+                        print("Player 1 doesn't have enough cards to wage war. Player 1 wins!")
                         exit()
 
                     elif players[0].num_cards() < 4 and players[1].num_cards() < 4:
@@ -88,3 +87,13 @@ class Game(object):
             # exit()
 
 
+    def header(self):
+        init()
+        print("*******************************************************************")
+        f = Figlet(font='standard')
+        print(colored(f.renderText("Let's Play War!"), "red"), end="")
+        print("*******************************************************************")
+        print("Welcome to an implementation of War, a two-player card game that")
+        print("you can be played to help past the time. Please read the README.md")
+        print("to learn how to play.")
+        print("*******************************************************************")
