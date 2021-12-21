@@ -31,7 +31,10 @@ class Game(object):
             for p in players:
                 p.add_card(deck.draw_card())
 
+        print("\n")
         print("Dealing out cards...")
+        print("\n")
+
         time.sleep(1)
 
         print("*******************************************************************")
@@ -81,11 +84,13 @@ class Game(object):
                     all_cards = [j for i in field for j in i]
                     players[0].prepend_cards(all_cards)
                     in_war = False
+                    print("{} won this round!".format(computer))
                     break
                 elif p1_card_rank < p2_card_rank:
                     all_cards = [j for i in field for j in i]
                     players[1].prepend_cards(all_cards)
                     in_war = False
+                    print("{} won this round!".format(player))
                     break
                 else:
                     print("*******************************************************************")
@@ -120,6 +125,7 @@ class Game(object):
                 print("{} wins!".format(computer))
                 break
 
+            print("\n")
             print("*******************************************************************")
             print("[SCOREBOARD]")
             print("{}: {} cards | {}: {} cards".format(computer, players[0].num_cards(), player, players[1].num_cards()))
