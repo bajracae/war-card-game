@@ -1,8 +1,7 @@
 import random
 
-from deck import Deck
 from collections import deque
-
+from deck import Deck
 
 class Player(Deck):
     def __init__(self, name):
