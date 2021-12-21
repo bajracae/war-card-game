@@ -95,6 +95,9 @@ class Game(object):
                     elif players[1].num_cards() < 4 and players[0].num_cards() >= 4:
                         print("{} doesn't have enough cards to wage war. {} wins!".format(colored(players[1].get_name(), "green"), colored(players[0].get_name(), "red")))
                         exit()
+                    elif players[0].num_cards() < 4 and players[1].num_cards() < 4:
+                        print("Both players don't have enough cards to wage war. The game has ended in a tie.")
+                        exit()
                     else:
                         print("Placing three cards down and flipping the fourth card...")
                         time.sleep(1)
