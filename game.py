@@ -17,6 +17,10 @@ class Game(object):
         deck = Deck()
 
         player = input("Enter your name: ")
+        
+        while player == "":
+            player = input("Error, enter your name: ")
+
         computer = "Computadora"
 
         # Create players of the game
@@ -27,7 +31,13 @@ class Game(object):
             for p in players:
                 p.add_card(deck.draw_card())
 
+        print("Dealing out cards...")
+        time.sleep(1)
+
+        print("*******************************************************************")
+        print("[SCOREBOARD]")
         print("{}: {} cards | {}: {} cards".format(computer, players[0].num_cards(), player, players[1].num_cards()))
+        print("*******************************************************************")
 
         # Draw one card from each player's pile
         while True:
@@ -53,21 +63,19 @@ class Game(object):
 
                 # Draw out the cards
                 if in_war == True:
-                    print("***********************************")
+                    print("*******************************************************************")
                     print("{}'s card".format(computer))
                     field[0][-1].ascii_card_three_face_down()
-                    print("***********************************")
+                    print("*******************")
                     print("{}'s card".format(player))
                     field[1][-1].ascii_card_three_face_down()
-                    print("***********************************")
                 else:
-                    print("***********************************")
+                    print("*******************************************************************")
                     print("{}'s card".format(computer))
                     field[0][-1].ascii_card()
-                    print("***********************************")
+                    print("*******************")
                     print("{}'s card".format(player))
                     field[1][-1].ascii_card()
-                    print("***********************************")
 
                 if p1_card_rank > p2_card_rank:
                     all_cards = [j for i in field for j in i]
@@ -80,11 +88,11 @@ class Game(object):
                     in_war = False
                     break
                 else:
-                    print("War!")
+                    print("*******************************************************************")
+                    print("WAR!")
                     in_war = True
                     
                     if players[0].num_cards() < 4 and players[1].num_cards() >= 4:
-                        print("Player 1 doesn't have enough cards to wage war. Player 2 wins!")
                         print("{} doesn't have enough cards to wage war. {} wins!".format(computer, player))
                         exit()
 
@@ -97,8 +105,8 @@ class Game(object):
                         exit()
 
                     else:
-                        print("Placing three cards down for war...")
-
+                        print("Placing three cards down and flipping the fourth card...")
+                        time.sleep(1)
                         for c in range(0, 3):
                             field[0].append(players[0].pop_card())
                             field[1].append(players[1].pop_card())
@@ -111,9 +119,11 @@ class Game(object):
             if players[1].num_cards() == 0:
                 print("{} wins!".format(computer))
                 break
-            
 
+            print("*******************************************************************")
+            print("[SCOREBOARD]")
             print("{}: {} cards | {}: {} cards".format(computer, players[0].num_cards(), player, players[1].num_cards()))
+            print("*******************************************************************")
 
     def header(self):
         init()
