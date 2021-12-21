@@ -1,6 +1,12 @@
 # war-card-game
 This game is a programming assignment for a job application.
 
+## Download libraries
+1) Make a Python virtual environment (optional)
+2) Install all the libraries in requirements.txt
+   1) ```pip install -r requirements.txt```
+
+
 ## Python version
 I used Python 2.7.5 during the development of this project.
 
